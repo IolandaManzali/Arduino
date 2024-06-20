@@ -47,7 +47,7 @@ The **R7FA4M1AB3CFM#AA0**, often referred to as RA4M1 in this datasheet, is the 
   * 1x CAN (pin D4, D5, external transceiver is required)
 
 See the full datasheet for the R7FA4M1AB3CFM#AA0 in the link below:
-- [R7FA4M1AB3CFM#AA0 datasheet](/resources/datasheets/ra4m1.pdf)
+- [R7FA4M1AB3CFM#AA0 datasheet](https://www.renesas.com/us/en/document/dst/ra4m1-group-datasheet?r=1054146)
 
 The **ESP32-S3-MINI-1-N8** is the secondary MCU with a built-in antenna for Wi-Fi® & Bluetooth® connectivity. This module operates on 3.3 V and communicates with the RA4M1 using a logic-level translator (TXB0108DQSR).
 
@@ -63,7 +63,7 @@ The **ESP32-S3-MINI-1-N8** is the secondary MCU with a built-in antenna for Wi-F
   * Bluetooth® 5
 
 See the full datasheet for the ESP32-S3-MINI-1-N8 in the link below:
-- [ESP32-S3-MINI-1-N8 datasheet](/resources/datasheets/esp32-s3-mini.pdf)
+- [ESP32-S3-MINI-1-N8 datasheet](https://www.espressif.com/sites/default/files/documentation/esp32-s3-mini-1_mini-1u_datasheet_en.pdf)
 
 # CONTENTS
 
@@ -491,6 +491,7 @@ This equipment contains a radio transmitter module with model approval code: CMI
 
 | Date       | **Revision** | **Changes**        |
 | ---------- | ------------ | ------------------ |
+| 08/06/2023 | 5            | Update microcontroller datasheet links|
 | 19/09/2023 | 4            | Update FCC section |
 | 25/07/2023 | 3            | Update Pin Table   |
 | 30/06/2023 | 2            | Update Pinout File |
@@ -540,7 +541,7 @@ RA4M1的工作电压固定为5V，而ESP32-S3模块为3.3V。这两个MCU之间�
   * 1个CAN（引脚D4、D5，需要外部收发器）
 
 请通过以下链接查看 R7FA4M1AB3CFM#AA0 的完整数据表：
-- [R7FA4M1AB3CFM#AA0 数据表](/resources/datasheets/ra4m1.pdf)
+- [R7FA4M1AB3CFM#AA0 数据表](https://www.renesas.com/us/en/document/dst/ra4m1-group-datasheet?r=1054146)
 
 **ESP32-S3-MINI-1-N8** 是二级MCU内置天线，用于Wi-Fi®和Bluetooth®连接。该模块工作电压为3.3V，通过逻辑电平转换器(TXB0108DQSR)与RA4M1通信。
 
@@ -556,7 +557,7 @@ RA4M1的工作电压固定为5V，而ESP32-S3模块为3.3V。这两个MCU之间�
   * 蓝牙® 5
 
 请在下面的链接中查看 ESP32-S3-MINI-1-N8 的完整数据表：
-- [ESP32-S3-MINI-1-N8数据表](/resources/datasheets/esp32-s3-mini.pdf)
+- [ESP32-S3-MINI-1-N8数据表](https://www.espressif.com/sites/default/files/documentation/esp32-c3-mini-1_datasheet_cn.pdf)
 
 # 目录
 
@@ -976,6 +977,7 @@ Arduino S.r.l.特此声明，本产品符合欧盟指令 2014/53/EU 的基本要
 
 | 日期       | ** **修订版** ** | **变更内容**  |
 | ---------- | ---------------- | ------------- |
+| 20/06/2024 | 5                | 更新微控制器数据手册链接|
 | 19/09/2023 | 4                | 更新 FCC 部分 |
 | 25/07/2023 | 3                | 更新引脚表    |
 | 30/06/2023 | 2                | 更新引脚文件  |
