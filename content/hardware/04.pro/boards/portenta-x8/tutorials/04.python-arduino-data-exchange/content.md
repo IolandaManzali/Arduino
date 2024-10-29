@@ -16,7 +16,7 @@ The container infrastructure provided by Arduino contains a pre-built Python® i
 
 While all the peripherals are accessible from the iMX8 processor running the Linux environment, it can be useful to let the onboard microcontroller take care of certain peripheral handling and exchange only the required data between the microcontroller and the Python® application.
 
-You will be guided on how to achieve this setup. It is recommendable to familiarize yourself with the foundational elements of the Portenta X8 and its infrastructure by reading the [user manual](https://docs.arduino.cc/tutorials/portenta-x8/user-manual) if you have not already done so.
+You will be guided on how to achieve this setup. It is recommendable to familiarize yourself with the foundational elements of the Portenta X8 and its infrastructure by reading [fundamentals of the Portenta X8](https://docs.arduino.cc/tutorials/portenta-x8/x8-fundamentals) if you have not already done so.
 
 ## Goals
 
@@ -32,6 +32,39 @@ You will be guided on how to achieve this setup. It is recommendable to familiar
 - Any sensor (in this example, we will use an [BME680](https://www.bosch-sensortec.com/products/environmental-sensors/gas-sensors/bme680/) I<sup>2</sup>C module)
 - [USB-C® cable (USB-C® to USB-A cable)](https://store.arduino.cc/products/usb-cable2in1-type-c)
 - [Arduino IDE 1.8.10+](https://www.arduino.cc/en/software), [Arduino IDE 2](https://www.arduino.cc/en/software), or [Arduino Cloud Editor](https://create.arduino.cc/editor)
+
+## Remote Procedure Call - RPC
+
+The two processors within the Portenta X8 require a communication mechanism to exchange data, known as an **RPC (Remote Procedure Call)**.
+
+**RPC** allows a program to trigger a **`procedure`** or **`function`** on another computer over a network rather than locally. It lets a program execute procedures **remotely**, with the details of network communication hidden to maintain transparency, making the remote call appear similar to a local one.
+
+It is particularly useful for distributed computing in a client-server model. The **`procedure call`** behaves as a **`request`** from the client, and the **`return value`** serves as the server's **`response`**. This model uses multiple computers connected over a network (often the Internet) to solve large computational tasks.
+
+While RPC aims to closely replicate local procedure calls, complete equivalence is not possible due to network communication challenges, which can introduce communication failures. To manage these issues, different RPC mechanisms adopt distinct semantics:
+
+- **`At most once` semantics** ensures that a remote call may fail but will not be run multiple times.
+- **`At least once` semantics** guarantees that the call is made at least once, even if it results in multiple activations.
+
+The Portenta X8 uses **MessagePack-RPC** for its communication (see the [library repository](https://github.com/msgpack-rpc/msgpack-rpc) for details). *MessagePack-RPC* relies on *MessagePack* as the serialization protocol, encoding data in *MsgPack* format, and is supported over:
+
+- OpenAMP via Shared Memory
+- SPI
+- Linux Char Device
+- TCP/IP
+
+![Linux Arduino RPC](assets/linux_arduino_RPC.png "Linux Arduino RPC")
+
+In the image above, the **M7 core** of the **STM32H7** manages communication between the Linux and Arduino environments. If an Arduino sketch runs on the **M4 core**, the **M7 core** acts as an intermediary, handling data requests between the M4 core and the Linux environment. Due to this setup, traditional dual-core processing is not supported on the Portenta X8.
+
+On the Linux side, a service called `m4-proxy` handles data transfer between Linux and Arduino.
+
+The communication process works as follows:
+
+- A program registers as the RPC server on port X, listing the procedures available for the M4 to call.
+- `m4-proxy` then forwards the calls from the M4 to the appropriate program/port.
+
+![RPC M4 proxy](assets/m4-proxy.png "RPC M4 proxy")
 
 ## Python® on the X8
 
@@ -205,7 +238,7 @@ Alternatively, you could modify the files directly on the X8 using an editor suc
 If you wonder how to specify the Python® script that is executed when running a container, have a look at the `Dockerfile` file. There you will find the `ENTRYPOINT` command that takes multiple arguments. In our example:
 
 ```python
-ENTRYPOINT [ "python3", "m4_to_python.py"]`
+ENTRYPOINT ["python3", "m4_to_python.py"]
 ```
 
 ## Conclusion
